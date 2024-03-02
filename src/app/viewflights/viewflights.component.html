@@ -1,0 +1,226 @@
+<div *ngIf="trip==1">
+  <table class="table table-hover">
+    <thead bgcolor="#E8E8E8	">
+      <tr align="center">
+        <th scope="col">Airlines</th>
+        <th scope="col">Departure</th>
+        <th scope="col">Duration</th>
+        <th scope="col">Arrival</th>
+        <th scope="col">Price</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of flights" align="center">
+        <td class="align-middle borderless">
+        <ul class="m-0" style="list-style-type:none;">
+          <li><img src={{i.logo}} alt="Indigo" width="30px" height="30px"></li>
+          <li><b>{{i.carrierName}}</b></li>
+          <li>{{i.carrierId}}</li>
+        </ul>
+      </td>
+      <td class="align-middle">
+        {{i.departureTime}}
+      </td>
+      <td class="align-middle">
+        <ul style="list-style-type:none;">
+          <li>{{i.duration}}</li>
+          <hr class="pr-4 pl-4">
+          <li>{{i.stops}}
+            <p style="display:inline" *ngIf="i.stops>1">stops</p>
+            <p style="display:inline" *ngIf="i.stops==1">stop</p>
+          </li>
+        </ul>
+
+      </td>
+      <td class="align-middle">
+        {{i.arrivalTime}}
+      </td>
+      <td class="align-middle">
+        <ul style="list-style-type:none;">
+        <li *ngIf="i.seatsLeft <= 3" style="color:red">{{i.seatsLeft}} seats left</li>
+          <li><b>₹ {{i.price}}</b></li>
+        </ul>
+      </td>
+      <td class="align-middle">
+        <button type="button" class="btn btn-outline-warning">Book</button>
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!------------------------------------------------------------------------------>
+
+<div class="d-flex justify-content-center " *ngIf="highlight1>=0 && highlight2>=0 && trip!=1">
+  <table class="table" *ngIf="trip!=1">
+    <tr>
+        <td class="align-middle borderless" >
+        <ul class="m-0" style="list-style-type:none;">
+          <li><img src={{rowdet1.logo}} alt="Indigo" width="30px" height="30px"></li>
+          <li><b>{{rowdet1.carrierName}}</b></li>
+          <li>{{rowdet1.carrierId}}</li>
+        </ul>
+      </td>
+      <td class="align-middle">
+        {{rowdet1.departureTime}}
+      </td>
+      <td class="align-middle">
+        <ul style="list-style-type:none; text-align: center;">
+          <li>{{rowdet1.duration}}</li>
+          <hr class="pr-4 pl-4">
+          <li>{{rowdet1.stops}}
+            <p style="display:inline" *ngIf="rowdet1.stops>1">stops</p>
+            <p style="display:inline" *ngIf="rowdet1.stops==1">stop</p>
+          </li>
+        </ul>
+
+      </td>
+      <td class="align-middle">
+        {{rowdet1.arrivalTime}}
+      </td>
+      <td class="align-middle">
+        <ul style="list-style-type:none;">
+        <li *ngIf="rowdet1.seatsLeft <= 3" style="color:red">{{rowdet1.seatsLeft}} seats left</li>
+          <li><b>₹ {{rowdet1.price}}</b></li>
+        </ul>
+      </td>
+      <td class="align-middle borderless" style="border-left:1px solid #C0C0C0;height:50px">
+        <ul class="m-0" style="list-style-type:none;">
+          <li><img src={{rowdet2.logo}} alt="Indigo" width="30px" height="30px"></li>
+          <li><b>{{rowdet2.carrierName}}</b></li>
+          <li>{{rowdet2.carrierId}}</li>
+        </ul>
+      </td>
+      <td class="align-middle">
+        {{rowdet2.departureTime}}
+      </td>
+      <td class="align-middle" >
+        <ul style="list-style-type:none; text-align: center;">
+          <li>{{rowdet2.duration}}</li>
+          <hr class="pr-4 pl-4">
+          <li>{{rowdet2.stops}}
+            <p style="display:inline" *ngIf="rowdet1.stops>1">stops</p>
+            <p style="display:inline" *ngIf="rowdet1.stops==1">stop</p>
+          </li>
+        </ul>
+
+      </td>
+      <td class="align-middle">
+        {{rowdet2.arrivalTime}}
+      </td>
+      <td class="align-middle">
+        <ul style="list-style-type:none;">
+        <li *ngIf="rowdet2.seatsLeft <= 3" style="color:red">{{rowdet2.seatsLeft}} seats left</li>
+          <li><b>₹ {{rowdet2.price}}</b></li>
+        </ul>
+      </td>
+      <td class="align-middle" style="border-left:1px solid #C0C0C0;height:50px">
+        <ul style="list-style-type:none;">
+          <label><b> Total Price</b> </label>
+          <li><b>₹ {{twoprice}}</b></li>
+        </ul>
+      </td>
+      <td class="align-middle">
+        <button type="button" class="btn btn-outline-warning">Book</button>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="d-flex justify-content-between" *ngIf="trip!=1">
+  <div class="col-6">
+    <table class="table table-hover" >
+      <thead bgcolor="#E8E8E8	">
+        <tr class="m-2" align="center">
+          <th scope="col">Airlines</th>
+          <th scope="col">Departure</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Arrival</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of flights; let row1=index" align="center" (click)="getdetails1(i,row1)" [class.active]="row1==highlight1">
+          <td class="align-middle borderless">
+          <ul class="m-0" style="list-style-type:none;">
+            <li><img src={{i.logo}} alt="Indigo" width="30px" height="30px"></li>
+            <li><b>{{i.carrierName}}</b></li>
+            <li>{{i.carrierId}}</li>
+          </ul>
+        </td>
+        <td class="align-middle">
+          {{i.departureTime}}
+        </td>
+        <td class="align-middle">
+          <ul style="list-style-type:none;">
+            <li>{{i.duration}}</li>
+            <hr class="pr-4 pl-4">
+            <li>{{i.stops}}
+              <p style="display:inline" *ngIf="i.stops>1">stops</p>
+              <p style="display:inline" *ngIf="i.stops==1">stop</p>
+            </li>
+          </ul>
+
+        </td>
+        <td class="align-middle">
+          {{i.arrivalTime}}
+        </td>
+        <td class="align-middle">
+          <ul style="list-style-type:none;">
+          <li *ngIf="i.seatsLeft <= 3" style="color:red">{{i.seatsLeft}} seats left</li>
+            <li><b>₹ {{i.price}}</b></li>
+          </ul>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-6">
+    <table class="table table-hover">
+      <thead bgcolor="#E8E8E8	">
+        <tr class="m-2"align="center">
+          <th scope="col">Airlines</th>
+          <th scope="col">Departure</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Arrival</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of flights; let row2=index" align="center" (click)="getdetails2(i,row2)" [class.active]="row2==highlight2">
+          <td class="align-middle borderless">
+          <ul class="m-0" style="list-style-type:none;">
+            <li><img src={{i.logo}} alt="Indigo" width="30px" height="30px"></li>
+            <li><b>{{i.carrierName}}</b></li>
+            <li>{{i.carrierId}}</li>
+          </ul>
+        </td>
+        <td class="align-middle">
+          {{i.departureTime}}
+        </td>
+        <td class="align-middle">
+          <ul style="list-style-type:none;">
+            <li>{{i.duration}}</li>
+            <hr class="pr-4 pl-4">
+            <li>{{i.stops}}
+              <p style="display:inline" *ngIf="i.stops>1">stops</p>
+              <p style="display:inline" *ngIf="i.stops==1">stop</p>
+            </li>
+          </ul>
+
+        </td>
+        <td class="align-middle">
+          {{i.arrivalTime}}
+        </td>
+        <td class="align-middle">
+          <ul style="list-style-type:none;">
+          <li *ngIf="i.seatsLeft <= 3" style="color:red">{{i.seatsLeft}} seats left</li>
+            <li><b>₹ {{i.price}}</b></li>
+          </ul>
+        </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
